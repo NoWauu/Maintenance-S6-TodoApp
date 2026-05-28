@@ -10,12 +10,10 @@ def toggle_task(task_index):
     """Bascule l'état d'une tâche."""
     st.session_state["tasks"][task_index]["done"] = not st.session_state["tasks"][task_index]["done"]
 
-
 def delete_task(task_index):
     """Supprime une tâche."""
-    st.session_state["tasks"].pop(task_index)
-
-
+    st.session_state["tasks"].pop(task_index)    
+    
 st.title("Ma TodoList")
 
 # Ajouter une nouvelle tâche
