@@ -22,7 +22,6 @@ def toggle_task(index: int) -> None:
     tasks = get_tasks()
     if 0 <= index < len(tasks):
         tasks[index]["done"] = not tasks[index].get("done", False)
-        print("Après :", st.session_state["tasks"][index ])
         logging.info(f"{tasks[index]['done']} : Task toggled: {tasks[index]['task']}")
 
 
