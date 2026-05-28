@@ -15,21 +15,25 @@ if st.button("Ajouter"):
 
 # Afficher les tâches en cours
 st.subheader("Liste des tâches")
-unfinished_tasks = [t for t in st.session_state["tasks"] if not t["done"]]
-if unfinished_tasks:
-    for i, t in enumerate(st.session_state["tasks"]):
-        if not t["done"]:
-            col1, col2 = st.columns([0.8, 0.2])
-            with col1:
-                st.write(t["task"])
-            with col2:
-                if st.button("Marquer comme fait", key=f"done_{i}"):
-                    st.session_state["tasks"][i]["done"] = True
-else:
+completed_tasks = []
+unfinished_found = False
+for i, t in enumerate(st.session_state["tasks"]):
+    if t["done"]:
+        completed_tasks.append(t)
+        continue
+
+    unfinished_found = True
+    col1, col2 = st.columns([0.8, 0.2])
+    with col1:
+        st.write(t["task"])
+    with col2:
+        if st.button("Marquer comme fait", key=f"done_{i}"):
+            st.session_state["tasks"][i]["done"] = True
+
+if not unfinished_found:
     st.info("Aucune tâche en cours.")
 
 # Afficher les tâches terminées dans un accordéon
-completed_tasks = [t for t in st.session_state["tasks"] if t["done"]]
 with st.expander("Tâches terminées"):
     if completed_tasks:
         for t in completed_tasks:
