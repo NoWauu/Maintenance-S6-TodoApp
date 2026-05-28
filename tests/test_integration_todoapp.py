@@ -24,7 +24,9 @@ def test_initial_render_shows_empty_state() -> None:
 
     assert [title.value for title in app.title] == ["Ma TodoList"]
     assert [subheader.value for subheader in app.subheader] == ["Liste des tâches"]
-    assert [info.value for info in app.info] == ["Aucune tâche pour l'instant. Ajoutez-en une !"]
+    assert [info.value for info in app.info] == [
+        "Aucune tâche pour l'instant. Ajoutez-en une !"
+    ]
     assert [button.label for button in app.button] == ["Ajouter"]
     assert [text_input.label for text_input in app.text_input] == ["Ajouter une tâche"]
     assert app.session_state["tasks"] == []
@@ -37,7 +39,11 @@ def test_adding_task_creates_a_pending_item() -> None:
 
     assert app.session_state["tasks"] == [{"task": "Buy milk", "done": False}]
     assert [markdown.value for markdown in app.markdown] == ["**À faire**", "Buy milk"]
-    assert [button.label for button in app.button] == ["Ajouter", "Marquer comme fait", "Supprimer"]
+    assert [button.label for button in app.button] == [
+        "Ajouter",
+        "Marquer comme fait",
+        "Supprimer",
+    ]
     assert len(app.info) == 0
 
 
@@ -49,7 +55,10 @@ def test_marking_task_complete_moves_it_to_completed_section() -> None:
     app.run()
 
     assert app.session_state["tasks"] == [{"task": "Buy milk", "done": True}]
-    assert [markdown.value for markdown in app.markdown] == ["**Terminées**", "~~Buy milk~~"]
+    assert [markdown.value for markdown in app.markdown] == [
+        "**Terminées**",
+        "~~Buy milk~~",
+    ]
     assert len(app.expander) == 1
     assert app.expander[0].label == "Voir 1 tâches terminées"
     assert [button.label for button in app.button] == [
@@ -67,5 +76,7 @@ def test_deleting_task_clears_it_from_state_and_ui() -> None:
     app.run()
 
     assert app.session_state["tasks"] == []
-    assert [info.value for info in app.info] == ["Aucune tâche pour l'instant. Ajoutez-en une !"]
+    assert [info.value for info in app.info] == [
+        "Aucune tâche pour l'instant. Ajoutez-en une !"
+    ]
     assert [button.label for button in app.button] == ["Ajouter"]

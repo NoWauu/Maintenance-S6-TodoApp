@@ -8,6 +8,7 @@ dependencies = [
     "pytest>=9.0.3",
     "logging>=0.4.9.6",
     "streamlit>=1.57.0",
+    "black>=26.5.1",
 ]
 
 [tool.pytest.ini_options]
