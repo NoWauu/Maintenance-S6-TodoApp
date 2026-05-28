@@ -34,6 +34,7 @@ def render() -> None:
             with col1:
                 st.write(t["task"])
             with col2:
+                print("Avant :", st.session_state["tasks"][index ])
                 st.button(
                     "Marquer comme fait",
                     key=f"task_{i}",
