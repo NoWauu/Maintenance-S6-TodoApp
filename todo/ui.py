@@ -2,6 +2,7 @@ import streamlit as st
 from .state import ensure_state, get_tasks
 from .actions import add_task, toggle_task, delete_task
 
+
 def render() -> None:
     ensure_state()
     st.title("Ma TodoList")
@@ -33,10 +34,22 @@ def render() -> None:
             with col1:
                 st.write(t["task"])
             with col2:
-                st.button("Marquer comme fait", key=f"task_{i}", on_click=toggle_task, args=(i,), use_container_width=True)
                 print("Avant :", st.session_state["tasks"][index ])
+                st.button(
+                    "Marquer comme fait",
+                    key=f"task_{i}",
+                    on_click=toggle_task,
+                    args=(i,),
+                    use_container_width=True,
+                )
             with col3:
-                st.button("Supprimer", key=f"delete_task_{i}", on_click=delete_task, args=(i,), use_container_width=True)
+                st.button(
+                    "Supprimer",
+                    key=f"delete_task_{i}",
+                    on_click=delete_task,
+                    args=(i,),
+                    use_container_width=True,
+                )
 
     if completed:
         st.markdown("**Terminées**")
@@ -46,6 +59,18 @@ def render() -> None:
                 with col1:
                     st.markdown(f"~~{t['task']}~~")
                 with col2:
-                    st.button("Marquer comme non fait", key=f"task_done_{i}", on_click=toggle_task, args=(i,), use_container_width=True)
+                    st.button(
+                        "Marquer comme non fait",
+                        key=f"task_done_{i}",
+                        on_click=toggle_task,
+                        args=(i,),
+                        use_container_width=True,
+                    )
                 with col3:
-                    st.button("Supprimer", key=f"delete_done_{i}", on_click=delete_task, args=(i,), use_container_width=True)
+                    st.button(
+                        "Supprimer",
+                        key=f"delete_done_{i}",
+                        on_click=delete_task,
+                        args=(i,),
+                        use_container_width=True,
+                    )

@@ -1,6 +1,12 @@
 from .state import ensure_state, get_tasks
 import logging
-logging.basicConfig(filename='logs/todo.log', level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+
+logging.basicConfig(
+    filename="logs/todo.log",
+    level=logging.INFO,
+    format="%(asctime)s - %(levelname)s - %(message)s",
+)
+
 
 def add_task(text: str) -> None:
     ensure_state()
@@ -10,6 +16,7 @@ def add_task(text: str) -> None:
     else:
         logging.warning(f"Attempt to add empty task")
 
+
 def toggle_task(index: int) -> None:
     ensure_state()
     tasks = get_tasks()
@@ -17,6 +24,7 @@ def toggle_task(index: int) -> None:
         tasks[index]["done"] = not tasks[index].get("done", False)
         print("Après :", st.session_state["tasks"][index ])
         logging.info(f"{tasks[index]['done']} : Task toggled: {tasks[index]['task']}")
+
 
 def delete_task(index: int) -> None:
     ensure_state()
