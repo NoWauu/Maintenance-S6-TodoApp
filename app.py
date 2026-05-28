@@ -14,14 +14,26 @@ def delete_task(task_index):
     """Supprime une tâche."""
     st.session_state["tasks"].pop(task_index)    
     
+
+def add_task():
+    """Ajoute une nouvelle tâche et vide l'input."""
+    new_task = st.session_state["new_task"].strip()
+    if new_task != "":
+        st.session_state["tasks"].append({"task": new_task, "done": False})
+    st.session_state["new_task"] = ""
+
 st.title("Ma TodoList")
 
 # Ajouter une nouvelle tâche
-with st.form(key="task_form", clear_on_submit=True):
-    new_task = st.text_input("Ajouter une tâche", key="new_task")
-    submitted = st.form_submit_button("Ajouter")
-if submitted and new_task.strip() != "":
-    st.session_state["tasks"].append({"task": new_task, "done": False})
+new_task = st.text_input("Ajouter une tâche")
+if st.button("Ajouter"):
+    if new_task.strip() != "":
+        st.session_state["tasks"].append({"task": new_task, "done": False})
+if "new_task" not in st.session_state:
+    st.session_state["new_task"] = ""
+
+st.text_input("Ajouter une tâche", key="new_task")
+st.button("Ajouter", on_click=add_task)
 
 # Afficher les tâches
 st.subheader("Liste des tâches")
