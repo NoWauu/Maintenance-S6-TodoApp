@@ -9,7 +9,7 @@ def render() -> None:
     with st.form(key="task_form", clear_on_submit=True):
         new_task = st.text_input("Ajouter une tâche", key="new_task")
         submitted = st.form_submit_button("Ajouter")
-    if submitted and new_task.strip() != "":
+    if submitted:
         add_task(new_task)
 
     st.subheader("Liste des tâches")
