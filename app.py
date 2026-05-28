@@ -10,9 +10,11 @@ def toggle_task(task_index):
     """Bascule l'état d'une tâche."""
     st.session_state["tasks"][task_index]["done"] = not st.session_state["tasks"][task_index]["done"]
 
+
 def delete_task(task_index):
     """Supprime une tâche."""
     st.session_state["tasks"].pop(task_index)
+
 
 st.title("Ma TodoList")
 
@@ -37,10 +39,10 @@ for i, t in enumerate(st.session_state["tasks"]):
         st.write(t["task"])
     with col2:
         button_label = "Marquer comme non fait" if t["done"] else "Marquer comme fait"
-        st.button(button_label, key=f"task_{i}", on_click=toggle_task, args=(i,))
+        st.button(button_label, key=f"task_{i}", on_click=toggle_task, args=(i,), use_container_width=True)
     with col3:
-        st.button("Supprimer", key=f"delete_task_{i}", on_click=delete_task, args=(i,))
-        
+        st.button("Supprimer", key=f"delete_task_{i}", on_click=delete_task, args=(i,), use_container_width=True)
+
 if not unfinished_found:
     st.info("Aucune tâche en cours.")
 
