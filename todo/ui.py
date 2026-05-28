@@ -34,6 +34,7 @@ def render() -> None:
                 st.write(t["task"])
             with col2:
                 st.button("Marquer comme fait", key=f"task_{i}", on_click=toggle_task, args=(i,), use_container_width=True)
+                print("Après :", st.session_state["tasks"][index ])
             with col3:
                 st.button("Supprimer", key=f"delete_task_{i}", on_click=delete_task, args=(i,), use_container_width=True)
 
