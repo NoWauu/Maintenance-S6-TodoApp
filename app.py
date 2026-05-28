@@ -5,6 +5,11 @@ import streamlit as st
 if "tasks" not in st.session_state:
     st.session_state["tasks"] = []
 
+
+def toggle_task(task_index):
+    """Bascule l'état d'une tâche."""
+    st.session_state["tasks"][task_index]["done"] = not st.session_state["tasks"][task_index]["done"]
+
 st.title("Ma TodoList")
 
 # Ajouter une nouvelle tâche
@@ -20,7 +25,7 @@ for i, t in enumerate(st.session_state["tasks"]):
     with col1:
         st.write(("Terminé - " if t["done"] else "À faire - ") + t["task"])
     with col2:
-        if st.button("Marquer comme fait", key=f"done_{i}"):
-            st.session_state["tasks"][i]["done"] = True
+        button_label = "Marquer comme non fait" if t["done"] else "Marquer comme fait"
+        st.button(button_label, key=f"task_{i}", on_click=toggle_task, args=(i,))
 
 # Lancer l'application avec : streamlit run app.py
